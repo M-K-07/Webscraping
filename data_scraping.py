@@ -46,9 +46,14 @@ try:
         data["Item"].append(item_name)
         data["Price"].append(item_price)
         data["Link"].append(item_link)
+    
 except Exception as e:
     print(e) 
         
+for html_file in os.listdir(item):
+    os.remove(os.path.join(item, html_file))
+os.rmdir(item)
+
 df=pd.DataFrame(data=data)
 df.to_csv(f"{item}.csv")
     
