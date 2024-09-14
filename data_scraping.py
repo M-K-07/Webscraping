@@ -13,7 +13,7 @@ file_no= 0
 os.makedirs(f'{item}', exist_ok=True)
 try:
     
-    for page in range (0,2):
+    for page in range (0,5):
         driver.get(f"https://www.amazon.in/s?k={item}&page={page}&crid=1RX9B2Y19OZKP&sprefix=hea%2Caps%2C323&ref=nb_sb_ss_pltr-sample-20_1_3")
         time.sleep(3)
         

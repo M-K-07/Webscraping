@@ -11,8 +11,8 @@ This project involves web scraping product information from Amazon using Seleniu
 Clone this repository to your local machine:
 
 ```
-git clone https://github.com/yourusername/your-repository.git
-cd your-repository
+git clone https://github.com/M-K-07/Webscraping.git
+cd Webscraping
 ```
 
 ### 2. Install Required Packages
