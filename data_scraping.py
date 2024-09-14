@@ -11,18 +11,24 @@ item=input("Search products: ")
 driver = webdriver.Chrome()
 file_no= 0
 os.makedirs(f'{item}', exist_ok=True)
-for page in range (0,5):
-    driver.get(f"https://www.amazon.in/s?k={item}&page={page}&crid=1RX9B2Y19OZKP&sprefix=hea%2Caps%2C323&ref=nb_sb_ss_pltr-sample-20_1_3")
-    time.sleep(3)
+try:
     
-    elems = driver.find_elements(By.CLASS_NAME, "puis-card-container")
-    for elements in elems:
-        data=elements.get_attribute("outerHTML")
-        with open(f"{item}/{item}_{file_no}.html","w",encoding="utf-8") as f:
-            f.write(data)
-            file_no+=1
-driver.close()
-
+    for page in range (0,2):
+        driver.get(f"https://www.amazon.in/s?k={item}&page={page}&crid=1RX9B2Y19OZKP&sprefix=hea%2Caps%2C323&ref=nb_sb_ss_pltr-sample-20_1_3")
+        time.sleep(3)
+        
+        elems = driver.find_elements(By.CLASS_NAME, "puis-card-container")
+        for elements in elems:
+            data=elements.get_attribute("outerHTML")
+            with open(f"{item}/{item}_{file_no}.html","w",encoding="utf-8") as f:
+                f.write(data)
+                file_no+=1
+    driver.close()
+except Exception as e:
+    print(e)
+    for html_file in os.listdir(item):
+        os.remove(os.path.join(item, html_file))
+    os.rmdir(item)
 
 # The Product HTML files are read by bs4 and extracts the useful info from the script and createsa a pandas DataFrame and store the extracted data with specified products file name
 
@@ -55,6 +61,6 @@ for html_file in os.listdir(item):
 os.rmdir(item)
 
 df=pd.DataFrame(data=data)
-df.to_csv(f"{item}.csv")
+df.to_excel(f"{item}.xlsx",index=False)
     
     
